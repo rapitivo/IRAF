@@ -1,0 +1,58 @@
+
+Download and Install Anaconda: https://www.continuum.io/downloads
+
+$ conda config --add channels http://ssb.stsci.edu/astroconda
+# Writes changes to ~/.condarc
+
+$ conda create -n iraf27 python=2.7 stsci pyraf iraf
+
+$ conda update conda
+$ conda update anaconda
+
+$ conda update -n astroconda --all
+
+$ sudo apt-get update
+$ sudo apt-get install libc6:i386 libz1:i386 libncurses5:i386 libbz2-1.0:i386 libuuid1:i386 libxcb1:i386 libxmu6:i386
+
+
+
+Now we are ready to run IRAF and/or PyRAF! I prefer to make a run file:
+$ cd
+$ mkdir bin && cd bin
+$ gedit runiraf
+
+and type
+
+#!/bin/bash
+source activate iraf27
+export SHELL=/bin/bash
+xgterm -T "IRAF" -n IRAF -fn 10x20 -bg black -cr white -fg orange -b 10 -ms red -geom 91x34+2+166 -sb -ls -sl 100 -wf +cn -e cl &
+
+and save.
+For PyRAF,
+
+$ gedit runpyraf
+
+#!/bin/bash
+source activate iraf27
+pyraf
+
+For mkiraf,
+$ gedit runmkiraf
+
+#!/bin/bash
+source activate iraf27
+mkiraf
+
+
+Finally,
+$ chmod u+x run\*
+
+To run the commands in anywhere type:
+$ run*command*
+
+
+Sources:
+https://astroconda.readthedocs.io/en/latest/installation.html#iraf-install
+https://astroconda.readthedocs.io/en/latest/faq.html
+http://rmreks.blogspot.com.br/2016/06/installing-iraf.html
